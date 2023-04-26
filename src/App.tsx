@@ -1,24 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
+import "nes.css/css/nes.min.css";
 import './App.css';
+import Home from './components/Home';
+
+export enum AppState {
+  Home,
+  NewHabit,
+  MainPage
+}
 
 function App() {
+
+  const renderActiveComponent = () =>
+  {
+    switch (activeComponent) {
+      case AppState.Home:
+        return <Home></Home> 
+      default:
+        return <Home></Home> 
+    }
+  }
+
+  const [activeComponent, setActiveComponent] = useState(AppState.Home);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {renderActiveComponent()}
     </div>
   );
 }
