@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import "nes.css/css/nes.min.css";
 import './App.css';
 import Home from './components/Home';
+import NewHabit from './components/NewHabit';
 
 export enum AppState {
   Home,
@@ -12,13 +12,18 @@ export enum AppState {
 
 function App() {
 
+  const goToNewHabitScreen = () => 
+  {
+    setActiveComponent(AppState.NewHabit);
+  }
+
   const renderActiveComponent = () =>
   {
     switch (activeComponent) {
       case AppState.Home:
-        return <Home></Home> 
-      default:
-        return <Home></Home> 
+        return <Home startClicked={goToNewHabitScreen} />
+      case AppState.NewHabit:
+        return <NewHabit />
     }
   }
 
