@@ -15,12 +15,15 @@
 .text-input {
     width: 70vw;
     text-align: center;
-    margin:auto;
+    margin: auto;
 }
 
 .menu-button {
     font-size: 6vw;
-    width: 60vw;
+    width: 40vw;
+    margin-top: 4vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
 }
 
 body {
@@ -31,7 +34,7 @@ body {
 .main-menu-button-tray {
     width: 100%;
     position: absolute;
-    bottom: 10vh;
+    bottom: 20vw;
 }
 
 #habit-field {

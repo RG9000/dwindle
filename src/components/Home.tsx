@@ -1,18 +1,17 @@
-interface HomeProps {
-  startClicked(): void
-}
+import { useNavigate } from 'react-router-dom';
 
-const Home = (props : HomeProps) => {
-return (
+const Home = () => {
+  const navigator = useNavigate();
+  return (
     <>
       <div className="title-text">
-       DWINDLE 
+        DWINDLE
       </div>
       <div className="sub-header nes-text is-primary">
-        Habit Breaker 
+        Habit Breaker
       </div>
       <div className="main-menu-button-tray">
-        <button type="button" onClick={props.startClicked} className="menu-button nes-btn is-success">Start</button>
+        <button type="button" onClick={() => navigator("/new")} className="menu-button nes-btn is-success">Start</button>
       </div>
     </>);
 }

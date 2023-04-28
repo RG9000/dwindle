@@ -3,6 +3,7 @@ import "nes.css/css/nes.min.css";
 import './App.css';
 import Home from './components/Home';
 import NewHabit from './components/NewHabit';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 
 export enum AppState {
   Home,
@@ -11,26 +12,14 @@ export enum AppState {
 }
 
 function App() {
-
-  const goToNewHabitScreen = () => 
-  {
-    setActiveComponent(AppState.NewHabit);
-  }
-
-  const renderActiveComponent = () =>
-  {
-    switch (activeComponent) {
-      case AppState.Home:
-        return <Home startClicked={goToNewHabitScreen} />
-      case AppState.NewHabit:
-        return <NewHabit />
-    }
-  }
-
-  const [activeComponent, setActiveComponent] = useState(AppState.Home);
   return (
     <div className="App">
-      {renderActiveComponent()}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/new" element={<NewHabit />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
