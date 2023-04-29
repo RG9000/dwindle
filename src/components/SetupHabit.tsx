@@ -29,6 +29,8 @@ const SetupHabit = () => {
             startFrequency: frequency,
             lastPartaken: now};
         
+            console.log(targetDate);
+        
         dispatch(updateHabitById(0, updatedHabit));
     }
     return (

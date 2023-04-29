@@ -4,5 +4,6 @@ export interface Habit {
   startDate: Date;
   targetEndDate: Date;
   lastPartaken: Date;
+  timesPartakenToday: number;
   startFrequency: number;
 }

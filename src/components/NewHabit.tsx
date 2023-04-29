@@ -15,7 +15,7 @@ const NewHabit = () => {
     }
 
     const nextClicked = () => {
-        const habit: Habit = {id: 0, name: habitName, startDate: new Date(), targetEndDate: new Date(), lastPartaken: new Date(), startFrequency: 0 };
+        const habit: Habit = {id: 0, name: habitName, startDate: new Date(), targetEndDate: new Date(), lastPartaken: new Date(), startFrequency: 0 , timesPartakenToday: 0};
         dispatch(addHabit(habit));
         navigator("/setup");
     }
