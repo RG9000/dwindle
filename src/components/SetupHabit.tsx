@@ -32,6 +32,7 @@ const SetupHabit = () => {
             console.log(targetDate);
         
         dispatch(updateHabitById(0, updatedHabit));
+        navigator("/");
     }
     return (
         <div>

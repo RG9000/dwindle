@@ -1,5 +1,5 @@
 .App {
-    margin-top: 4vh;
+    margin-top: 9vh;
     text-align: center;
 }
 
@@ -47,6 +47,13 @@ body {
     margin-top: 12vh;
     width: 70vw;
     padding-left: 5vw;
+}
+
+.reset-button {
+    position: fixed;
+    top: 1vh;
+    right: 1vh;
+    font-size: 1.3vh;
 }
 
 #habit-field {
