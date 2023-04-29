@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/Home';
 import NewHabit from './components/NewHabit';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import SetupHabit from './components/SetupHabit';
 
 export enum AppState {
   Home,
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<NewHabit />} />
+          <Route path="/setup" element={<SetupHabit/>} />
         </Routes>
       </BrowserRouter>
     </div>

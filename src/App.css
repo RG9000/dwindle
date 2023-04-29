@@ -1,15 +1,21 @@
 .App {
-    margin-top: 6vh;
+    margin-top: 2vh;
     text-align: center;
 }
 
 .title-text {
-    font-size: 9vw;
+    font-size: 5vh;
 }
 
 .info-text {
-    font-size: 7vw;
+    font-size: 3.5vh;
     margin: 3vh 15vw;
+}
+
+.info-text-2 {
+    font-size: 2.5vh;
+    margin: 1vh 15vw;
+    margin-top: 8vh;
 }
 
 .text-input {
@@ -19,8 +25,8 @@
 }
 
 .menu-button {
-    font-size: 6vw;
-    width: 40vw;
+    font-size: 3.4vh;
+    width: 43vw;
     margin-top: 4vw;
     padding-top: 2vw;
     padding-bottom: 2vw;
@@ -34,11 +40,49 @@ body {
 .main-menu-button-tray {
     width: 100%;
     position: absolute;
-    bottom: 20vw;
+    bottom: 7vh;
+}
+
+.logo {
+    margin-top: 18vh;
+    width: 70vw;
+    padding-left: 5vw;
 }
 
 #habit-field {
-    font-size: 5vw;
+    font-size: 2.3vh;
     width: 80%;
+    padding: 2vh 0;
     margin-top: 10vh;
+}
+
+#frequency-field {
+    font-size: 2.3vh;
+    width: 80%;
+    padding: 2vh 0;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+}
+
+#target-field {
+    font-size: 2.3vh;
+    width: 80%;
+    padding: 2vh 0;
+    margin-top: 2vh;
+}
+
+
+/* Hide the up and down arrows for Webkit-based browsers */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Hide the up and down arrows for Firefox */
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
