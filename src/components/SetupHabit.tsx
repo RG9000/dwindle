@@ -13,26 +13,30 @@ const SetupHabit = () => {
     const onFrequencyChanged = (e: ChangeEvent<HTMLInputElement>) => {
         setFrequency(parseInt(e.target.value));
     }
-    
+
     const [target, setTarget] = useState(0);
     const onTargetChanged = (e: ChangeEvent<HTMLInputElement>) => {
         setTarget(parseInt(e.target.value));
     }
 
     const nextClick = () => {
-        const now = new Date();
-        const targetDate = new Date(now);
-        targetDate.setDate(now.getDate() + target);
-        const updatedHabit : Habit = {...habits.filter((e : Habit) => e.id == 0)[0],
-            startDate: now,
-            targetEndDate: targetDate,
-            startFrequency: frequency,
-            lastPartaken: now};
-        
+        if (frequency != 0 && target != 0) {
+            const now = new Date();
+            const targetDate = new Date(now);
+            targetDate.setDate(now.getDate() + target);
+            const updatedHabit: Habit = {
+                ...habits.filter((e: Habit) => e.id == 0)[0],
+                startDate: now,
+                targetEndDate: targetDate,
+                startFrequency: frequency,
+                lastPartaken: now
+            };
+
             console.log(targetDate);
-        
-        dispatch(updateHabitById(0, updatedHabit));
-        navigator("/");
+
+            dispatch(updateHabitById(0, updatedHabit));
+            navigator("/");
+        }
     }
     return (
         <div>
@@ -41,8 +45,8 @@ const SetupHabit = () => {
             <div className="info-text-2"> In how many days will thou relent?</div>
             <input value={target} onChange={onTargetChanged} type="number" placeholder="days to stop" id="target-field" className="nes-input text-input" />
             <div className="main-menu-button-tray">
-                <button type="button" onClick={() => navigator("/")} className="menu-button nes-btn is-error">Back</button>
-                <button type="button" onClick={() => nextClick()} className="menu-button nes-btn is-success">Begin</button>
+                <button id="back-button" type="button" onClick={() => navigator("/new")} className="menu-button nes-btn is-error">Back</button>
+                <button id="next-button" type="button" onClick={() => nextClick()} className="menu-button nes-btn is-success">Begin</button>
             </div>
         </div>);
 }

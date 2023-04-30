@@ -117,16 +117,16 @@ const Home = () => {
       <button onClick={doReset} className="reset-button nes-btn is-warning">
         reset
       </button>
-      <div className="title-text">
+      <div id="home-title" className="title-text">
         {title}
       </div>
-      <div className="sub-header nes-text is-primary">
+      <div id="home-subtitle" className="sub-header nes-text is-primary">
         {isNew ? "Habit Breaker" : "Click thy hammer when thy sin is committed"}
       </div>
       <img className="logo" onClick={hammerClicked} src={hammer}></img>
       <div className="main-menu-button-tray">
         {isNew ? 
-        <button type="button" onClick={() => navigator("/new")} className="menu-button nes-btn is-success">Start</button>
+        <button id="home-start-button" type="button" onClick={() => navigator("/new")} className="menu-button nes-btn is-success">Start</button>
         :
         <>
         <div className="sub-header nes-text is-secondary">
