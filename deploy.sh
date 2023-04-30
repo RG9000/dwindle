@@ -1,4 +1,5 @@
 #!/bin/bash
+pkill node
 nohup npm start &
 npx cypress run --browser "chrome" && echo "tests passed! Deploying to azure" &&
 npm run build &&
