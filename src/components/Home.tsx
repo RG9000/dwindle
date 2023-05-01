@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Habit } from '../interfaces/habit';
 import { useEffect, useState } from 'react';
 import { removeHabit, updateHabitById } from '../store/actions';
+import { ReactComponent as Hamburger } from '../assets/hamburger.svg';
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -11,14 +13,15 @@ const Home = () => {
   const habits = useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null } }) => state.habits.habits);
 
   const [isNew, setIsNew] = useState(true);
+  const [dialogueVisible, setDialogueVisible] = useState(false);
   const [title, setTitle] = useState("DWINDLE");
   const [day, setDay] = useState(0);
   const [timesLeft, setTimesLeft] = useState(0);
-  const [thisHabit, setThisHabit] = useState<Habit|null>(habits[0] ?? null);
+  const [thisHabit, setThisHabit] = useState<Habit | null>(habits[0] ?? null);
 
-  const diffDates = (d1 : Date, d2 : Date) => {
-      var diff = Math.abs(new Date(d2).getTime() - new Date(d1).getTime());
-      return Math.ceil(diff / (1000 * 3600 * 24)); 
+  const diffDates = (d1: Date, d2: Date) => {
+    var diff = Math.abs(new Date(d2).getTime() - new Date(d1).getTime());
+    return Math.ceil(diff / (1000 * 3600 * 24));
   }
 
   const getNowDate = () => {
@@ -26,36 +29,34 @@ const Home = () => {
   }
 
   const calculateInitialState = () => {
-    if (thisHabit === null)
-    {
+    if (thisHabit === null) {
       setTitle("DWINDLE");
       setIsNew(true);
     }
-    else
-    {
+    else {
       setIsNew(false);
       setTitle(habits[0].name);
       const thisDay = diffDates(habits[0].targetEndDate, getNowDate());
       setDay(thisDay);
-      if (getNowDate().getDay() === new Date(habits[0].lastPartaken).getDay())
-      {
+      if (getNowDate().getDay() === new Date(habits[0].lastPartaken).getDay()) {
         const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
         const startFrequency = habits[0].startFrequency;
-        const allowedToday = Math.floor((startFrequency/totalDays) * thisDay) - habits[0].timesPartakenToday;
+        const allowedToday = Math.floor((startFrequency / totalDays) * thisDay) - habits[0].timesPartakenToday;
         setTimesLeft(allowedToday);
       }
-      else
-      {
+      else {
         const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
         const startFrequency = habits[0].startFrequency;
-        const allowedToday = Math.floor((startFrequency/totalDays) * thisDay);
+        const allowedToday = Math.floor((startFrequency / totalDays) * thisDay);
         setTimesLeft(allowedToday);
-        const thisHabit : Habit = habits.filter((e : Habit) => e.id === 0)[0];
+        const thisHabit: Habit = habits.filter((e: Habit) => e.id === 0)[0];
 
-        const updatedHabit : Habit = {...thisHabit,
+        const updatedHabit: Habit = {
+          ...thisHabit,
           lastPartaken: getNowDate(),
-          timesPartakenToday: 0};
-          dispatch(updateHabitById(0, updatedHabit));
+          timesPartakenToday: 0
+        };
+        dispatch(updateHabitById(0, updatedHabit));
         setThisHabit(updatedHabit);
       }
     }
@@ -68,54 +69,53 @@ const Home = () => {
 
   const hammerClicked = () => {
     const now = getNowDate();
-    const thisHabit : Habit = habits.filter((e : Habit) => e.id === 0)[0];
-    setTimesLeft(timesLeft-1);
+    const thisHabit: Habit = habits.filter((e: Habit) => e.id === 0)[0];
+    setTimesLeft(timesLeft - 1);
 
-    const updatedHabit : Habit = {...thisHabit,
-        lastPartaken: now,
-        timesPartakenToday: thisHabit.timesPartakenToday+1};
-        if (habits.length === 0)
-        {
-          setIsNew(true);
-        }
-        else
-        {
-          setIsNew(false);
-          const thisDay = diffDates(habits[0].targetEndDate, getNowDate());
-          setDay(thisDay);
-          if (getNowDate().getDay() === new Date(habits[0].lastPartaken).getDay())
-          {
-            const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
-            const startFrequency = habits[0].startFrequency;
-            const allowedToday = Math.floor((startFrequency/totalDays) * thisDay) - habits[0].timesPartakenToday;
-            setTimesLeft(allowedToday);
-          }
-          else
-          {
-            const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
-            const startFrequency = habits[0].startFrequency;
-            const allowedToday = Math.floor((startFrequency/totalDays) * thisDay);
-            setTimesLeft(allowedToday);
-            const thisHabit : Habit = habits.filter((e : Habit) => e.id === 0)[0];
-    
-            const updatedHabit : Habit = {...thisHabit,
-              lastPartaken: getNowDate(),
-              timesPartakenToday: 0};
-          }
-        }
+    const updatedHabit: Habit = {
+      ...thisHabit,
+      lastPartaken: now,
+      timesPartakenToday: thisHabit.timesPartakenToday + 1
+    };
+    if (habits.length === 0) {
+      setIsNew(true);
+    }
+    else {
+      setIsNew(false);
+      const thisDay = diffDates(habits[0].targetEndDate, getNowDate());
+      setDay(thisDay);
+      if (getNowDate().getDay() === new Date(habits[0].lastPartaken).getDay()) {
+        const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
+        const startFrequency = habits[0].startFrequency;
+        const allowedToday = Math.floor((startFrequency / totalDays) * thisDay) - habits[0].timesPartakenToday;
+        setTimesLeft(allowedToday);
+      }
+      else {
+        const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
+        const startFrequency = habits[0].startFrequency;
+        const allowedToday = Math.floor((startFrequency / totalDays) * thisDay);
+        setTimesLeft(allowedToday);
+        const thisHabit: Habit = habits.filter((e: Habit) => e.id === 0)[0];
+
+        const updatedHabit: Habit = {
+          ...thisHabit,
+          lastPartaken: getNowDate(),
+          timesPartakenToday: 0
+        };
+      }
+    }
     dispatch(updateHabitById(0, updatedHabit));
   }
 
-  const doReset = () => {
-    dispatch(removeHabit(0));
-    setThisHabit(null);
-    calculateInitialState();
+  const openDialogue = () => {
+    setDialogueVisible(true);
   }
-  
+
+
   return (
     <>
-      <button onClick={doReset} className="reset-button nes-btn is-warning">
-        reset
+      <button onClick={() => openDialogue()} className="reset-button nes-btn is-warning">
+        <Hamburger />
       </button>
       <div id="home-title" className="title-text">
         {title}
@@ -125,20 +125,25 @@ const Home = () => {
       </div>
       <img className="logo" onClick={hammerClicked} src={hammer}></img>
       <div className="main-menu-button-tray">
-        {isNew ? 
-        <button id="home-start-button" type="button" onClick={() => navigator("/new")} className="menu-button nes-btn is-success">Start</button>
-        :
-        <>
-        <div className="sub-header nes-text is-secondary">
-          You may partake {timesLeft} more times today
-        </div>
-        <br/>
-        <div className="sub-header nes-text is-secondary">
-          {day} days remaining
-        </div>
-        </>
+        {isNew ?
+          <button id="home-start-button" type="button" onClick={() => navigator("/new")} className="menu-button nes-btn is-success">Start</button>
+          :
+          <>
+            <div id="home-partake-div" className="sub-header nes-text is-secondary">
+              You may partake {timesLeft} more times today
+            </div>
+            <br />
+            <div id="home-days-div" className="sub-header nes-text is-secondary">
+              {day} days remaining
+            </div>
+          </>
         }
       </div>
+      {dialogueVisible ?
+      <div>
+        Hello world
+      </div>
+      : null}
     </>);
 }
 

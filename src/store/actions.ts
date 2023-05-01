@@ -23,3 +23,8 @@ export const updateHabitById = (id: number, updatedHabit: Partial<Habit>) => ({
   type: "UPDATE_HABIT_BY_ID",
   payload: { id, updatedHabit },
 });
+
+export const updateNewHabitName = (updatedHabitName: string) => ({
+  type: "UPDATE_NEW_HABIT_NAME",
+  payload: { updatedHabitName },
+});

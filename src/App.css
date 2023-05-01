@@ -53,7 +53,9 @@ body {
     position: fixed;
     top: 1vh;
     right: 1vh;
-    font-size: 1.3vh;
+    padding-top: 0;
+    padding-left: 1vw;
+    padding-right: 1vw;
 }
 
 #habit-field {

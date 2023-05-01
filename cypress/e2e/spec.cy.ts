@@ -78,4 +78,34 @@ describe('setup habit', () => {
     cy.get('#next-button').should('have.text', 'Begin').click();
     cy.url().should('include', '/setup')
   });
+  it('can go forward with valid values', () => {
+    cy.get('#target-field').clear().type('1').should('have.value', '1');
+    cy.get('#frequency-field').clear().type('1').should('have.value', '1');
+    cy.get('#next-button').should('have.text', 'Begin').click();
+    cy.url().should('equal', 'http://localhost:3000/')
+  });
+})
+
+describe('home page with habit', () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000");
+    cy.get('#home-start-button').click();
+    cy.get('#habit-field').type('Test Habit');
+    cy.get('#new-habit-next').should('have.text', 'Next').click();
+    cy.get('#target-field').clear().type('1').should('have.value', '1');
+    cy.get('#frequency-field').clear().type('1').should('have.value', '1');
+    cy.get('#next-button').should('have.text', 'Begin').click();
+  });
+  it('shows habit name as title', () => {
+    cy.get('#home-title').should('have.text', 'Test Habit');
+  });
+  it('shows subtitle', () => {
+    cy.get('#home-subtitle').should('have.text', 'Click thy hammer when thy sin is committed');
+  });
+  it('shows the number of times you can partake today', () => {
+    cy.get('#home-partake-div').should('have.text', 'You may partake 1 more times today');
+  });
+  it('shows subtitle', () => {
+    cy.get('#home-days-div').should('have.text', '1 days remaining');
+  });
 })

@@ -2,14 +2,14 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Habit } from "../interfaces/habit";
-import { addHabit } from "../store/actions";
+import { updateNewHabitName } from "../store/actions";
 
 const NewHabit = () => {
     const navigate = useNavigate();
     const [habitName, setHabitName] = useState("");
     const [nameInvalid, setNameInvalid] = useState(false);
     const dispatch = useDispatch();
-    const habits = useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null } }) => state.habits.habits);
+    const storedName = useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null; newHabitName: string | null; } }) => state.habits.newHabitName);
 
     const onHabitNameChanged = (e: ChangeEvent<HTMLInputElement>) => {
         setNameInvalid(false);
@@ -20,9 +20,9 @@ const NewHabit = () => {
     }
 
     const nextClicked = () => {
+        console.log(habitName);
         if (habitName.length > 0) {
-            const habit: Habit = { id: 0, name: habitName, startDate: new Date(), targetEndDate: new Date(), lastPartaken: new Date(), startFrequency: 0, timesPartakenToday: 0 };
-            dispatch(addHabit(habit));
+            dispatch(updateNewHabitName(habitName));
             navigate("/setup");
         }
         else {
@@ -31,9 +31,9 @@ const NewHabit = () => {
     }
 
     useEffect(() => {
-        if (habits && habits.length > 0)
+        if (storedName)
         {
-            setHabitName(habits[0].name);
+            setHabitName(storedName);
         }
     }, []);
     return (
