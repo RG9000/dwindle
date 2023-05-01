@@ -3,7 +3,7 @@ import hammer from '../assets/hammer.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import { Habit } from '../interfaces/habit';
 import { useEffect, useState } from 'react';
-import { removeHabit, updateHabitById } from '../store/actions';
+import { updateHabitById } from '../store/actions';
 import { ReactComponent as Hamburger } from '../assets/hamburger.svg';
 
 
@@ -28,43 +28,42 @@ const Home = () => {
     return new Date();
   }
 
-  const calculateInitialState = () => {
-    if (thisHabit === null) {
-      setTitle("DWINDLE");
-      setIsNew(true);
-    }
-    else {
-      setIsNew(false);
-      setTitle(habits[0].name);
-      const thisDay = diffDates(habits[0].targetEndDate, getNowDate());
-      setDay(thisDay);
-      if (getNowDate().getDay() === new Date(habits[0].lastPartaken).getDay()) {
-        const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
-        const startFrequency = habits[0].startFrequency;
-        const allowedToday = Math.floor((startFrequency / totalDays) * thisDay) - habits[0].timesPartakenToday;
-        setTimesLeft(allowedToday);
-      }
-      else {
-        const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
-        const startFrequency = habits[0].startFrequency;
-        const allowedToday = Math.floor((startFrequency / totalDays) * thisDay);
-        setTimesLeft(allowedToday);
-        const thisHabit: Habit = habits.filter((e: Habit) => e.id === 0)[0];
-
-        const updatedHabit: Habit = {
-          ...thisHabit,
-          lastPartaken: getNowDate(),
-          timesPartakenToday: 0
-        };
-        dispatch(updateHabitById(0, updatedHabit));
-        setThisHabit(updatedHabit);
-      }
-    }
-
-  }
 
   useEffect(() => {
-    calculateInitialState();
+    const calculateInitialState = () => {
+      if (thisHabit === null) {
+        setTitle("DWINDLE");
+        setIsNew(true);
+      }
+      else {
+        setIsNew(false);
+        setTitle(habits[0].name);
+        const thisDay = diffDates(habits[0].targetEndDate, getNowDate());
+        setDay(thisDay);
+        if (getNowDate().getDay() === new Date(habits[0].lastPartaken).getDay()) {
+          const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
+          const startFrequency = habits[0].startFrequency;
+          const allowedToday = Math.floor((startFrequency / totalDays) * thisDay) - habits[0].timesPartakenToday;
+          setTimesLeft(allowedToday);
+        }
+        else {
+          const totalDays = diffDates(habits[0].targetEndDate, habits[0].startDate);
+          const startFrequency = habits[0].startFrequency;
+          const allowedToday = Math.floor((startFrequency / totalDays) * thisDay);
+          setTimesLeft(allowedToday);
+          const thisHabit: Habit = habits.filter((e: Habit) => e.id === 0)[0];
+
+          const updatedHabit: Habit = {
+            ...thisHabit,
+            lastPartaken: getNowDate(),
+            timesPartakenToday: 0
+          };
+          dispatch(updateHabitById(0, updatedHabit));
+          setThisHabit(updatedHabit);
+        }
+      }
+      calculateInitialState();
+    }
   }, [thisHabit]);
 
   const hammerClicked = () => {
@@ -95,13 +94,6 @@ const Home = () => {
         const startFrequency = habits[0].startFrequency;
         const allowedToday = Math.floor((startFrequency / totalDays) * thisDay);
         setTimesLeft(allowedToday);
-        const thisHabit: Habit = habits.filter((e: Habit) => e.id === 0)[0];
-
-        const updatedHabit: Habit = {
-          ...thisHabit,
-          lastPartaken: getNowDate(),
-          timesPartakenToday: 0
-        };
       }
     }
     dispatch(updateHabitById(0, updatedHabit));
@@ -123,7 +115,7 @@ const Home = () => {
       <div id="home-subtitle" className="sub-header nes-text is-primary">
         {isNew ? "Habit Breaker" : "Click thy hammer when thy sin is committed"}
       </div>
-      <img className="logo" onClick={hammerClicked} src={hammer}></img>
+      <img className="logo" alt="hammer logo" onClick={hammerClicked} src={hammer}></img>
       <div className="main-menu-button-tray">
         {isNew ?
           <button id="home-start-button" type="button" onClick={() => navigator("/new")} className="menu-button nes-btn is-success">Start</button>
@@ -140,10 +132,10 @@ const Home = () => {
         }
       </div>
       {dialogueVisible ?
-      <div>
-        Hello world
-      </div>
-      : null}
+        <div>
+          Hello world
+        </div>
+        : null}
     </>);
 }
 

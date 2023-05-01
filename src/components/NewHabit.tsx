@@ -9,8 +9,7 @@ const NewHabit = () => {
     const [habitName, setHabitName] = useState("");
     const [nameInvalid, setNameInvalid] = useState(false);
     const dispatch = useDispatch();
-    const storedName = useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null; newHabitName: string | null; } }) => state.habits.newHabitName);
-
+    
     const onHabitNameChanged = (e: ChangeEvent<HTMLInputElement>) => {
         setNameInvalid(false);
         if (e.target.value.length < 16)
@@ -31,6 +30,7 @@ const NewHabit = () => {
     }
 
     useEffect(() => {
+        const storedName = useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null; newHabitName: string | null; } }) => state.habits.newHabitName);
         if (storedName)
         {
             setHabitName(storedName);

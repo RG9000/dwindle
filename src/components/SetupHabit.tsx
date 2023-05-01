@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addHabit, updateHabitById } from '../store/actions';
+import { addHabit } from '../store/actions';
 import { Habit } from '../interfaces/habit';
 import { useDispatch, useSelector } from 'react-redux';
 
