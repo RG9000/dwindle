@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
   build-test-deploy:
@@ -31,9 +31,6 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Install Cypress
-      run: npx cypress install
-
     - name: Build React App
       run: npm run build
 
@@ -49,4 +46,3 @@ jobs:
       run: |
         echo "SWA_TOKEN=${{ secrets.DWINDLE_TOKEN }}" > .env
         npx swa deploy --env production --deployment-token ${{ secrets.DWINDLE_TOKEN }} ./build
-
