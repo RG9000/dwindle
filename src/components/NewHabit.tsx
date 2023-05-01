@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Habit } from "../interfaces/habit";
@@ -6,7 +6,7 @@ import { updateNewHabitName } from "../store/actions";
 
 const NewHabit = () => {
     const navigate = useNavigate();
-    const [habitName, setHabitName] = useState("");
+    const [habitName, setHabitName] = useState(useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null; newHabitName: string | null; } }) => state.habits.newHabitName) ?? "");
     const [nameInvalid, setNameInvalid] = useState(false);
     const dispatch = useDispatch();
     
@@ -28,14 +28,7 @@ const NewHabit = () => {
             setNameInvalid(true);
         }
     }
-
-    useEffect(() => {
-        const storedName = useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null; newHabitName: string | null; } }) => state.habits.newHabitName);
-        if (storedName)
-        {
-            setHabitName(storedName);
-        }
-    }, []);
+    
     return (
         <div>
             <div id="new-habit-title" className="info-text">What art thou trying to diminish?</div>

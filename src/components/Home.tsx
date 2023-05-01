@@ -30,7 +30,7 @@ const Home = () => {
 
 
   useEffect(() => {
-    const calculateInitialState = () => {
+    function calculateInitialState() {
       if (thisHabit === null) {
         setTitle("DWINDLE");
         setIsNew(true);
@@ -62,9 +62,9 @@ const Home = () => {
           setThisHabit(updatedHabit);
         }
       }
-      calculateInitialState();
     }
-  }, [thisHabit]);
+    calculateInitialState();
+  }, [dispatch, habits, thisHabit]);
 
   const hammerClicked = () => {
     const now = getNowDate();
