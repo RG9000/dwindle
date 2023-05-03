@@ -105,7 +105,7 @@ const Home = () => {
   }
 
   const handleNewHabit = () => {
-    console.log('New habit clicked');
+    navigator("/new");
   };
 
 

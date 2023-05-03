@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addHabit } from '../store/actions';
+import { addHabit, updateNewHabitName } from '../store/actions';
 import { Habit } from '../interfaces/habit';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -52,7 +52,7 @@ const SetupHabit = () => {
             };
 
             console.log(targetDate);
-
+            dispatch(updateNewHabitName(""));
             dispatch(addHabit(newHabit));
             navigator("/");
         }

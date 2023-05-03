@@ -23,12 +23,12 @@ return (
     <div className={`habit-dropdown${isOpen ? ' visible' : ''}`}>
       <div className="dropdown-content">
         {habits.map((habit) => (
-          <div key={habit.id} className="dropdown-item">
+          <div key={habit.id} className="dropdown-item no-select">
             {habit.name}
           </div>
         ))}
-        <div className="dropdown-item" onClick={handleNewHabitClick}>
-          New Habit
+        <div className="dropdown-item no-select" onClick={handleNewHabitClick}>
+          + New Habit
         </div>
       </div>
     </div>
