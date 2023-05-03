@@ -5,6 +5,7 @@ import { Habit } from '../interfaces/habit';
 import { useEffect, useState } from 'react';
 import { updateHabitById } from '../store/actions';
 import { ReactComponent as Hamburger } from '../assets/hamburger.svg';
+import HabitDropdown from './HabitDropdown';
 
 
 const Home = () => {
@@ -13,7 +14,6 @@ const Home = () => {
   const habits = useSelector((state: { habits: { habits: Habit[]; selectedHabit: Habit | null } }) => state.habits.habits);
 
   const [isNew, setIsNew] = useState(true);
-  const [dialogueVisible, setDialogueVisible] = useState(false);
   const [title, setTitle] = useState("DWINDLE");
   const [day, setDay] = useState(0);
   const [timesLeft, setTimesLeft] = useState(0);
@@ -24,10 +24,11 @@ const Home = () => {
     return Math.ceil(diff / (1000 * 3600 * 24));
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const getNowDate = () => {
     return new Date();
   }
-
 
   useEffect(() => {
     function calculateInitialState() {
@@ -100,8 +101,12 @@ const Home = () => {
   }
 
   const openDialogue = () => {
-    setDialogueVisible(true);
+    setIsOpen(!isOpen);
   }
+
+  const handleNewHabit = () => {
+    console.log('New habit clicked');
+  };
 
 
   return (
@@ -131,11 +136,8 @@ const Home = () => {
           </>
         }
       </div>
-      {dialogueVisible ?
-        <div>
-          Hello world
-        </div>
-        : null}
+      <HabitDropdown habits={habits} isOpen={isOpen} onNewHabit={handleNewHabit} />
+
     </>);
 }
 

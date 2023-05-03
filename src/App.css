@@ -81,6 +81,51 @@ body {
 }
 
 
+/* App.css or any other CSS file you want to include this in */
+
+.habit-dropdown {
+    position: fixed;
+    top: 8vh;
+    left: 0;
+    right: 0;
+    background-color: #f0f0f0;
+    width: 80%;
+    margin: 2vw auto;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    /* To ensure the dropdown is above other elements */
+    transform: translateY(-100%);
+}
+
+.dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-item {
+    background-color: #3d7dca;
+    color: white;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #1e5a8c;
+}
+
+.habit-dropdown.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
 /* Hide the up and down arrows for Webkit-based browsers */
 
 input[type="number"]::-webkit-inner-spin-button,
